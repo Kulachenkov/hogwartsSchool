@@ -35,10 +35,7 @@ public class AvatarController {
     @GetMapping(value = "/{id}/avatar-from-db")
     public ResponseEntity<byte[]> downloadAvatar(@PathVariable Long id) {
         Avatar avatar = avatarService.findAvatar(id);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
-        headers.setContentLength(avatar.getData().length);
-        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
+        return ResponseEntity.status(HttpStatus.OK).body(avatar.getData());
     }
 
     @GetMapping(value = "/{id}/avatar-from-file")
